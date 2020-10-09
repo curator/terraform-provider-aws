@@ -60,6 +60,7 @@ func resourceAwsRoute53DelegationSetCreate(d *schema.ResourceData, meta interfac
 	set := out.DelegationSet
 	d.SetId(cleanDelegationSetId(*set.Id))
 	d.Set("name_servers", expandNameServers(set.NameServers))
+	d.Set("reference_name", set.CallerReference)
 	return nil
 }
 
@@ -80,7 +81,7 @@ func resourceAwsRoute53DelegationSetRead(d *schema.ResourceData, meta interface{
 
 	d.SetId(cleanDelegationSetId(*set.Id))
 	d.Set("name_servers", expandNameServers(set.NameServers))
-
+	d.Set("reference_name", set.CallerReference)
 	return nil
 }
 
